@@ -1,0 +1,1122 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eventify | Event Management</title>
+
+<style>
+
+/* ================= GENERAL ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f7f8fc;
+    color: #1f2937;
+}
+
+/* ================= NAVBAR ================= */
+
+nav {
+    width: 100%;
+    padding: 18px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: white;
+
+    box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: #635bff;
+}
+
+.logo span {
+    color: #111827;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: #635bff;
+}
+
+.nav-btn {
+    padding: 11px 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #635bff;
+    color: white;
+
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 500px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 70px 7%;
+
+    background:
+        linear-gradient(120deg, #eef2ff, #faf5ff);
+}
+
+.hero-content {
+    width: 55%;
+}
+
+.hero-content h1 {
+    font-size: 52px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: #111827;
+}
+
+.hero-content h1 span {
+    color: #635bff;
+}
+
+.hero-content p {
+    max-width: 600px;
+
+    color: #6b7280;
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 13px 25px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+    font-weight: 600;
+
+    border: none;
+}
+
+.primary-btn {
+    background: #635bff;
+    color: white;
+}
+
+.secondary-btn {
+    background: white;
+    color: #635bff;
+    border: 1px solid #635bff;
+}
+
+/* ================= STATS ================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    padding: 35px 7%;
+
+    background: white;
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-card h2 {
+    color: #635bff;
+    font-size: 30px;
+}
+
+.stat-card p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* ================= EVENTS ================= */
+
+.events-section {
+    padding: 70px 7%;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    color: #6b7280;
+}
+
+/* ================= SEARCH ================= */
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 35px;
+}
+
+.search-box {
+    flex: 1;
+}
+
+.search-box input,
+.category-select {
+    width: 100%;
+    padding: 13px 15px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+
+    outline: none;
+    background: white;
+}
+
+.category-select {
+    max-width: 200px;
+}
+
+/* ================= EVENT CARDS ================= */
+
+.events-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 25px;
+}
+
+.event-card {
+    background: white;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+
+    transition: 0.3s;
+
+    position: relative;
+}
+
+.event-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,0.12);
+}
+
+.event-image {
+    height: 180px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 55px;
+}
+
+.tech {
+    background: linear-gradient(135deg,#dbeafe,#e0e7ff);
+}
+
+.music {
+    background: linear-gradient(135deg,#fce7f3,#f3e8ff);
+}
+
+.business {
+    background: linear-gradient(135deg,#dcfce7,#d1fae5);
+}
+
+.sports {
+    background: linear-gradient(135deg,#fef3c7,#ffedd5);
+}
+
+.event-content {
+    padding: 20px;
+}
+
+.event-date {
+    color: #635bff;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+.event-content h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.event-content p {
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+.event-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.location {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.register-event {
+    padding: 9px 15px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #635bff;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.favorite {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: white;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* ================= ABOUT ================= */
+
+.about {
+    padding: 70px 7%;
+
+    background: white;
+
+    display: flex;
+
+    gap: 60px;
+
+    align-items: center;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h2 {
+    font-size: 32px;
+
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    color: #6b7280;
+
+    line-height: 1.8;
+
+    margin-bottom: 20px;
+}
+
+.about-box {
+    flex: 1;
+
+    padding: 45px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(135deg,#eef2ff,#f5f3ff);
+
+    text-align: center;
+
+    font-size: 70px;
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.55);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 2000;
+}
+
+.modal-box {
+    width: 90%;
+    max-width: 450px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    position: relative;
+}
+
+.close {
+    position: absolute;
+
+    right: 20px;
+    top: 15px;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    color: #6b7280;
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+}
+
+.modal-box input {
+    width: 100%;
+
+    padding: 13px;
+
+    margin-bottom: 15px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    outline: none;
+}
+
+.submit-btn {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #635bff;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 35px 7%;
+
+    background: #111827;
+
+    color: white;
+
+    text-align: center;
+}
+
+footer p {
+    color: #9ca3af;
+
+    margin-top: 8px;
+
+    font-size: 13px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 800px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .about {
+        flex-direction: column;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .category-select {
+        max-width: none;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="logo">
+        Event<span>ify</span>
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="#home">Home</a></li>
+
+        <li><a href="#events">Events</a></li>
+
+        <li><a href="#about">About</a></li>
+
+        <li><a href="#contact">Contact</a></li>
+
+    </ul>
+
+    <button class="nav-btn" onclick="openModal('General Event Registration')">
+        Create Event
+    </button>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>
+            Discover & Manage
+            <span>Amazing Events</span>
+        </h1>
+
+        <p>
+            Plan, discover and register for professional events,
+            conferences, workshops and entertainment programs
+            from one powerful platform.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button class="primary-btn"
+                    onclick="document.getElementById('events').scrollIntoView()">
+                Explore Events
+            </button>
+
+            <button class="secondary-btn"
+                    onclick="document.getElementById('about').scrollIntoView()">
+                Learn More
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats">
+
+    <div class="stat-card">
+        <h2>250+</h2>
+        <p>Events</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>15K+</h2>
+        <p>Participants</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>50+</h2>
+        <p>Organizers</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>20+</h2>
+        <p>Cities</p>
+    </div>
+
+</section>
+
+
+<!-- ================= EVENTS ================= -->
+
+<section class="events-section" id="events">
+
+    <div class="section-header">
+
+        <h2>Upcoming Events</h2>
+
+        <p>
+            Find the perfect event for your interests
+        </p>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="controls">
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Search events..."
+                onkeyup="filterEvents()"
+            >
+
+        </div>
+
+
+        <select
+            id="categoryFilter"
+            class="category-select"
+            onchange="filterEvents()"
+        >
+
+            <option value="all">All Categories</option>
+
+            <option value="technology">Technology</option>
+
+            <option value="music">Music</option>
+
+            <option value="business">Business</option>
+
+            <option value="sports">Sports</option>
+
+        </select>
+
+    </div>
+
+
+    <!-- Event Cards -->
+
+    <div class="events-grid" id="eventsGrid">
+
+
+        <!-- Event 1 -->
+
+        <div class="event-card" data-category="technology">
+
+            <button class="favorite"
+                    onclick="favoriteEvent(this)">
+                ♡
+            </button>
+
+            <div class="event-image tech">
+                💻
+            </div>
+
+            <div class="event-content">
+
+                <div class="event-date">
+                    OCT 12, 2026
+                </div>
+
+                <h3>Future Tech Summit</h3>
+
+                <p>
+                    Explore AI, cloud computing,
+                    cybersecurity and future technologies.
+                </p>
+
+                <div class="event-footer">
+
+                    <span class="location">
+                        📍 Chennai
+                    </span>
+
+                    <button class="register-event"
+                            onclick="openModal('Future Tech Summit')">
+                        Register
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Event 2 -->
+
+        <div class="event-card" data-category="music">
+
+            <button class="favorite"
+                    onclick="favoriteEvent(this)">
+                ♡
+            </button>
+
+            <div class="event-image music">
+                🎵
+            </div>
+
+            <div class="event-content">
+
+                <div class="event-date">
+                    OCT 18, 2026
+                </div>
+
+                <h3>Music Festival</h3>
+
+                <p>
+                    Enjoy live performances,
+                    music, food and entertainment.
+                </p>
+
+                <div class="event-footer">
+
+                    <span class="location">
+                        📍 Bengaluru
+                    </span>
+
+                    <button class="register-event"
+                            onclick="openModal('Music Festival')">
+                        Register
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Event 3 -->
+
+        <div class="event-card" data-category="business">
+
+            <button class="favorite"
+                    onclick="favoriteEvent(this)">
+                ♡
+            </button>
+
+            <div class="event-image business">
+                📊
+            </div>
+
+            <div class="event-content">
+
+                <div class="event-date">
+                    NOV 05, 2026
+                </div>
+
+                <h3>Business Leaders Meet</h3>
+
+                <p>
+                    Connect with entrepreneurs,
+                    industry leaders and professionals.
+                </p>
+
+                <div class="event-footer">
+
+                    <span class="location">
+                        📍 Mumbai
+                    </span>
+
+                    <button class="register-event"
+                            onclick="openModal('Business Leaders Meet')">
+                        Register
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Event 4 -->
+
+        <div class="event-card" data-category="sports">
+
+            <button class="favorite"
+                    onclick="favoriteEvent(this)">
+                ♡
+            </button>
+
+            <div class="event-image sports">
+                🏆
+            </div>
+
+            <div class="event-content">
+
+                <div class="event-date">
+                    NOV 20, 2026
+                </div>
+
+                <h3>College Sports Meet</h3>
+
+                <p>
+                    Participate in exciting sports
+                    competitions and activities.
+                </p>
+
+                <div class="event-footer">
+
+                    <span class="location">
+                        📍 Coimbatore
+                    </span>
+
+                    <button class="register-event"
+                            onclick="openModal('College Sports Meet')">
+                        Register
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <div class="about-text">
+
+        <h2>
+            Everything You Need
+            to Manage Events
+        </h2>
+
+        <p>
+            Eventify provides a simple and professional
+            platform for discovering and managing events.
+            Organizers can promote their events while
+            participants can easily find and register
+            for events they love.
+        </p>
+
+        <button class="primary-btn"
+                onclick="openModal('Event Management')">
+            Get Started
+        </button>
+
+    </div>
+
+
+    <div class="about-box">
+
+        🎟️
+
+    </div>
+
+</section>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="registrationModal">
+
+    <div class="modal-box">
+
+        <span class="close"
+              onclick="closeModal()">
+            ×
+        </span>
+
+        <h2 id="modalTitle">
+            Event Registration
+        </h2>
+
+        <form id="eventForm">
+
+            <input
+                type="text"
+                id="userName"
+                placeholder="Full Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="userEmail"
+                placeholder="Email Address"
+                required
+            >
+
+            <input
+                type="tel"
+                id="userPhone"
+                placeholder="Phone Number"
+                required
+            >
+
+            <button
+                type="submit"
+                class="submit-btn">
+                Confirm Registration
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="contact">
+
+    <h3>Eventify</h3>
+
+    <p>
+        Professional Event Management Platform
+    </p>
+
+    <p>
+        © 2026 Eventify. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+/* ================= MODAL ================= */
+
+let selectedEvent = "";
+
+function openModal(eventName) {
+
+    selectedEvent = eventName;
+
+    document.getElementById("modalTitle").textContent =
+        "Register for " + eventName;
+
+    document.getElementById("registrationModal").style.display =
+        "flex";
+}
+
+
+function closeModal() {
+
+    document.getElementById("registrationModal").style.display =
+        "none";
+}
+
+
+/* Close modal when clicking outside */
+
+window.onclick = function(event) {
+
+    const modal =
+        document.getElementById("registrationModal");
+
+    if (event.target === modal) {
+        closeModal();
+    }
+
+};
+
+
+/* ================= REGISTRATION ================= */
+
+document.getElementById("eventForm").addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("userName").value;
+
+        alert(
+            "Registration Successful!\n\n" +
+            "Event: " + selectedEvent +
+            "\nName: " + name
+        );
+
+        this.reset();
+
+        closeModal();
+
+    }
+);
+
+
+/* ================= FAVORITE ================= */
+
+function favoriteEvent(button) {
+
+    if (button.textContent === "♡") {
+
+        button.textContent = "♥";
+
+    } else {
+
+        button.textContent = "♡";
+
+    }
+
+}
+
+
+/* ================= SEARCH & FILTER ================= */
+
+function filterEvents() {
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const category =
+        document.getElementById("categoryFilter")
+        .value;
+
+    const cards =
+        document.querySelectorAll(".event-card");
+
+
+    cards.forEach(function(card) {
+
+        const title =
+            card.querySelector("h3")
+            .textContent
+            .toLowerCase();
+
+        const cardCategory =
+            card.getAttribute("data-category");
+
+
+        const searchMatch =
+            title.includes(search);
+
+        const categoryMatch =
+            category === "all" ||
+            cardCategory === category;
+
+
+        if (searchMatch && categoryMatch) {
+
+            card.style.display = "block";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
+```
